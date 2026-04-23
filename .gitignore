@@ -1,0 +1,16 @@
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Duplicate originals you copied into assets/ — site uses the renamed versions
+assets/Critical Essay.docx
+assets/MEMO.docx
+assets/Reflection-Essay.docx
+
+# Sessions / Claude working files (just in case any leak in)
+.claude/
