@@ -20,7 +20,9 @@ Single-page portfolio website for the INTO Suffolk Integrated Master's Program.
 ├── js/
 │   └── main.js             ← small interactions (year, back-to-top, nav highlight)
 ├── README.md               ← this file
+├── CLAUDE.md               ← project rules for future Claude sessions
 ├── FILES.md                ← naming guide for files you still need to add
+├── GITHUB_SETUP.md         ← one-time publishing instructions
 └── assets/                 ← put all your files here
     ├── elevator-pitch.mp4
     ├── imp-reflection.mp4
