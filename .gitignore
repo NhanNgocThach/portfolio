@@ -11,9 +11,10 @@ Desktop.ini
 assets/Critical Essay.docx
 assets/MEMO.docx
 assets/Reflection-Essay.docx
-assets/IMP_Reflection.docx
 assets/Path_Reflection.docx
 assets/AE061_Reflection.docx
+# Old PDF cover letter — replaced by the .docx version
+assets/ae065-cover-letter.pdf
 
 # Sessions / Claude working files (just in case any leak in)
 .claude/

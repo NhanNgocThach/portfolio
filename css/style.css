@@ -1,6 +1,6 @@
 /* ============================================================
    IMP Final Portfolio — Nhan Ngoc Thach
-   Click-to-expand single-page layout. Dark default + light theme.
+   Single-active-view layout (tabs). Dark default + light theme.
    ============================================================ */
 
 :root {
@@ -44,7 +44,6 @@ html[data-theme="light"] {
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -71,18 +70,9 @@ h1, h2, h3, h4 {
   margin-top: 0;
 }
 h1 { font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.15; }
-h3 { font-size: 1.05rem; color: var(--ink); margin-bottom: .35rem; }
-h4 { font-size: .95rem; margin-bottom: .35rem; }
+h2 { font-size: 1.4rem; margin-bottom: .6rem; }
+h3 { font-size: 1.05rem; color: var(--ink); margin-bottom: .55rem; }
 p  { margin: 0 0 1rem; }
-
-code {
-  font-family: "JetBrains Mono", Menlo, Consolas, monospace;
-  background: var(--bg-elev);
-  padding: .12rem .42rem;
-  border-radius: 4px;
-  font-size: .85em;
-  border: 1px solid var(--border);
-}
 
 /* ============================================================
    Top nav
@@ -113,6 +103,39 @@ nav.topnav {
   color: var(--ink);
   letter-spacing: -.01em;
 }
+
+.nav-tabs {
+  display: flex;
+  gap: .35rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .25rem;
+}
+.nav-tab {
+  background: transparent;
+  border: none;
+  color: var(--muted-strong);
+  padding: .45rem 1.1rem;
+  font-size: .85rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all var(--transition);
+  line-height: 1;
+}
+.nav-tab:hover {
+  color: var(--ink);
+  background: var(--surface-hover);
+}
+.nav-tab.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px var(--accent-soft);
+}
+html[data-theme="light"] .nav-tab.active { color: #fff; }
+
 .nav-actions {
   display: flex;
   gap: .5rem;
@@ -148,8 +171,53 @@ nav.topnav {
 header.hero {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 4.5rem 1.5rem 2.5rem;
+  padding: 3rem 1.5rem 2rem;
 }
+
+/* Avatar — small circle, clean ring */
+.avatar {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border-strong);
+  background: var(--surface);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.avatar img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.avatar.no-image img { display: none; }
+.avatar-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: -.02em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  z-index: 1;
+}
+
 .hero-kicker {
   display: inline-block;
   font-size: .72rem;
@@ -175,19 +243,93 @@ header.hero {
 .hero-meta strong { color: var(--ink); margin-right: .35rem; }
 
 /* ============================================================
-   Main content
+   Main
    ============================================================ */
 main {
   max-width: var(--max);
   margin: 0 auto;
   padding: 1rem 1.5rem 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 /* ============================================================
-   Expandable panel (used for top-level sections AND class cards)
+   Views — only one visible at a time
+   ============================================================ */
+.view {
+  display: none;
+  animation: fadeIn .35s ease both;
+}
+.view.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Intro view layout
+   ============================================================ */
+.intro-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.75rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
+}
+.intro-card h2 {
+  color: var(--ink);
+  margin-bottom: .6rem;
+}
+.intro-card p {
+  color: var(--muted-strong);
+  margin-bottom: 0;
+}
+
+.intro-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 720px) {
+  .intro-row { grid-template-columns: 1fr 1fr; }
+}
+
+.intro-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--shadow);
+  transition: all var(--transition);
+}
+.intro-block:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.intro-block h3 {
+  color: var(--accent);
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: .9rem;
+}
+
+/* ============================================================
+   Class grid — 2 columns on desktop
+   ============================================================ */
+.class-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 720px) {
+  .class-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ============================================================
+   Expandable panel (used by class cards)
    ============================================================ */
 .panel {
   background: var(--surface);
@@ -204,7 +346,7 @@ main {
 }
 
 .panel-header {
-  padding: 1.4rem 1.75rem;
+  padding: 1.15rem 1.4rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -235,15 +377,10 @@ main {
   text-transform: uppercase;
 }
 .panel-title {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: .1rem;
   letter-spacing: -.01em;
-}
-.panel-sub {
-  font-size: .85rem;
-  color: var(--muted);
 }
 
 .expand-icon {
@@ -266,33 +403,12 @@ main {
   max-height: 0;
   overflow: hidden;
   transition: max-height .45s cubic-bezier(.4, 0, .2, 1), padding var(--transition);
-  padding: 0 1.75rem;
+  padding: 0 1.4rem;
 }
 .panel.open > .panel-body {
-  max-height: 8000px;
-  padding: 0 1.75rem 1.5rem;
+  max-height: 4000px;
+  padding: 0 1.4rem 1.2rem;
 }
-.panel-body > * + * { margin-top: 1rem; }
-
-/* ============================================================
-   Class grid (inside the Classes panel)
-   ============================================================ */
-.class-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-@media (min-width: 720px) {
-  .class-grid { grid-template-columns: 1fr 1fr; }
-}
-
-.class-card {
-  background: var(--bg-elev);
-}
-.class-card .panel-header { padding: 1.1rem 1.3rem; }
-.class-card .panel-body { padding: 0 1.3rem; }
-.class-card.open > .panel-body { padding: 0 1.3rem 1.2rem; }
-.class-card .panel-title { font-size: 1.05rem; }
 
 /* ============================================================
    Download link cards
@@ -360,7 +476,11 @@ main {
 .download-link.missing {
   opacity: .55;
   cursor: not-allowed;
-  pointer-events: none;
+}
+.download-link.missing:hover {
+  transform: none;
+  border-color: var(--border);
+  background: var(--bg-elev);
 }
 .download-link.missing .dl-icon {
   background: rgba(245, 158, 11, .12);
@@ -368,41 +488,8 @@ main {
 }
 
 /* ============================================================
-   Reflection blockquote
+   Footer + back-to-top
    ============================================================ */
-blockquote.reflection {
-  background: var(--bg-elev);
-  border-left: 4px solid var(--accent);
-  padding: 1.25rem 1.5rem;
-  margin: 0;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: .98rem;
-  line-height: 1.85;
-  color: var(--ink);
-  transition: all var(--transition);
-}
-blockquote.reflection p { margin: 0 0 .85rem; }
-blockquote.reflection p:last-child { margin-bottom: 0; }
-blockquote.reflection:hover {
-  background: var(--surface-hover);
-  border-left-width: 6px;
-}
-
-/* ============================================================
-   Misc
-   ============================================================ */
-.placeholder-text {
-  color: var(--muted);
-  font-style: italic;
-  margin: 0 0 .7rem;
-  font-size: .92rem;
-}
-
-.section-intro-text {
-  color: var(--muted-strong);
-  margin-bottom: 0;
-}
-
 footer {
   max-width: var(--max);
   margin: 0 auto;
@@ -413,7 +500,6 @@ footer {
   text-align: center;
 }
 
-/* Back-to-top */
 #back-to-top {
   position: fixed;
   right: 1.5rem;
@@ -441,5 +527,6 @@ footer {
 @media print {
   nav.topnav, footer, #back-to-top, .expand-icon { display: none; }
   body { background: white; color: black; }
-  .panel-body { max-height: none !important; padding: 0 1.75rem 1.5rem !important; }
+  .view { display: block !important; }
+  .panel-body { max-height: none !important; padding: 0 1.4rem 1.2rem !important; }
 }

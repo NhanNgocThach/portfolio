@@ -1,8 +1,9 @@
 /* ============================================================
    IMP Final Portfolio — interactions
+   - Tab switching between views (Introduction / Classes)
    - Theme toggle (dark / light) with localStorage
    - Language toggle (EN / VI) with localStorage
-   - Click-to-expand panels (top-level sections AND class cards)
+   - Singleton class cards: only one open at a time
    - File-existence probes — missing assets get a "Coming soon" state
    - Footer year + back-to-top button
    ============================================================ */
@@ -10,22 +11,22 @@
 /* ------------------------------------------------------------
    i18n dictionary
    English text lives in HTML directly via data-i18n attributes.
-   We only store the Vietnamese strings here; English = original HTML.
-   Per project rules, essay/blockquote bodies are NOT translated —
-   so reflection_body and ae061_reflection_body are absent on purpose.
+   We only store Vietnamese strings here; English = original HTML.
+   Per project rules, essay/blockquote bodies are NOT translated.
    ------------------------------------------------------------ */
 const i18n = {
   vi: {
+    /* Nav */
+    nav_intro: "Giới Thiệu",
+    nav_classes: "Các Môn Học",
+
     /* Hero */
     hero_kicker: "INTO Suffolk · Chương trình Thạc sĩ Tích hợp",
     hero_title: "Hồ Sơ Cuối Khóa",
     hero_sub: "Tổng hợp các bài tập học thuật, chuyên môn và bài phản ánh — minh chứng cho sự sẵn sàng học sau đại học tại Đại học Suffolk.",
-    hero_student: "Sinh viên:",
-    hero_major: "Chuyên ngành dự kiến:",
-    hero_major_value: "[Chuyên ngành]",
+    hero_major: "Chuyên ngành:",
 
     /* Generic */
-    section_label: "Mục",
     action_download: "Tải xuống",
     action_open: "Mở",
     action_coming: "Sắp có",
@@ -36,11 +37,11 @@ const i18n = {
 
     /* Reflection */
     reflection_title: "Bài Phản Ánh",
+    reflection_doc_title: "Bài Phản Ánh Viết",
     reflection_video_title: "Video Phản Ánh",
 
     /* Elevator Pitch */
     pitch_title: "Bài Thuyết Trình Giới Thiệu",
-    pitch_body: "Một bài giới thiệu ngắn về tôi và những mục tiêu tôi dự định theo đuổi sau chương trình AE.",
     pitch_file_title: "Video Bài Thuyết Trình Giới Thiệu",
 
     /* Classes */
@@ -60,12 +61,10 @@ const i18n = {
     ae052_critical_title: "Bài Luận Phân Tích Phê Bình",
     ae052_reflective_title: "Bài Luận Phản Ánh",
     ae052_memo_title: "Bản Ghi Nhớ Chuyên Môn",
-    ae052_narrative_title: "Bài Luận Tự Sự — \"Du Học\"",
+    ae052_narrative_title: "Bài Luận Tự Sự",
 
     /* AE061 */
     ae061_title: "Kỹ Năng Viết & Nghiên Cứu Sau Đại Học",
-    ae061_reflection_title: "Phản Ánh Khóa Học",
-    ae061_assignments_title: "Bài Tập",
     ae061_bib_title: "Thư Mục Chú Giải",
     ae061_paper_title: "Bài Nghiên Cứu",
 
@@ -74,29 +73,30 @@ const i18n = {
     ae065_resume_title: "Sơ Yếu Lý Lịch",
     ae065_cover_title: "Thư Xin Việc",
     ae065_linkedin_title: "Hồ Sơ LinkedIn",
-    ae065_interview_title: "Yêu Cầu Phỏng Vấn Thông Tin",
+    ae065_interview_title: "Dự Án Phỏng Vấn Thông Tin",
     ae065_final_title: "Bài Thuyết Trình Cuối",
 
     /* Footer */
     footer: "Chương trình Thạc sĩ Tích hợp INTO Suffolk"
   },
   en: {
-    /* English fallbacks for action labels (used by the file-probe code
-       when it has to swap text dynamically) */
     action_download: "Download",
     action_open: "Open",
     action_coming: "Coming soon"
   }
 };
 
-/* In-memory store of the original English HTML for each translatable
-   element, so we can switch back to EN without losing inline markup. */
+/* In-memory store of original English HTML for translatable elements */
 const originalText = new WeakMap();
 
 function captureOriginals() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     if (!originalText.has(el)) originalText.set(el, el.innerHTML);
   });
+}
+
+function pickLabel(lang, key) {
+  return (i18n[lang] && i18n[lang][key]) || (i18n.en && i18n.en[key]) || key;
 }
 
 /* ------------------------------------------------------------
@@ -112,8 +112,6 @@ function applyLanguage(lang) {
       if (orig !== undefined) el.innerHTML = orig;
     } else {
       const t = (i18n[lang] || {})[key];
-      // If a translation exists, use it. Otherwise leave English in place
-      // (this is what we want for essay/blockquote bodies).
       if (t !== undefined) el.innerHTML = t;
       else {
         const orig = originalText.get(el);
@@ -122,8 +120,7 @@ function applyLanguage(lang) {
     }
   });
 
-  // Action labels on download links may have been overwritten by the
-  // file-probe code to "Coming soon". Re-apply the right label.
+  // Re-apply correct download/coming labels after language switch
   document.querySelectorAll('[data-doc-action]').forEach(el => {
     const link = el.closest('a');
     if (link && link.classList.contains('missing')) {
@@ -142,10 +139,6 @@ function applyLanguage(lang) {
   try { localStorage.setItem('portfolio-lang', lang); } catch (e) { /* ignore */ }
 }
 
-function pickLabel(lang, key) {
-  return (i18n[lang] && i18n[lang][key]) || (i18n.en && i18n.en[key]) || key;
-}
-
 /* ------------------------------------------------------------
    Theme
    ------------------------------------------------------------ */
@@ -160,23 +153,58 @@ function applyTheme(theme) {
 }
 
 /* ------------------------------------------------------------
-   Click-to-expand panels (works for both top-level sections and
-   the nested .class-card panels inside the Classes section).
+   View switching (singleton-style tabs)
    ------------------------------------------------------------ */
-function installPanelToggles() {
-  document.querySelectorAll('.panel').forEach(panel => {
-    // Each panel must have a direct .panel-header child (button) and a
-    // direct .panel-body child. We use direct-child checks so that
-    // nested panels (class cards inside Classes) don't double-bind.
-    const header = panel.querySelector(':scope > .panel-header');
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => {
+    v.classList.toggle('active', v.dataset.view === name);
+  });
+  document.querySelectorAll('.nav-tab').forEach(b => {
+    const isActive = b.dataset.view === name;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
+  // When leaving the Classes view, collapse any open class cards
+  if (name !== 'classes') {
+    document.querySelectorAll('.class-card.open').forEach(c => {
+      c.classList.remove('open');
+      const h = c.querySelector('.panel-header');
+      if (h) h.setAttribute('aria-expanded', 'false');
+    });
+  }
+  try { localStorage.setItem('portfolio-view', name); } catch (e) { /* ignore */ }
+  // Scroll back to the top of the content so the user sees the view start
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function installNavTabs() {
+  document.querySelectorAll('.nav-tab').forEach(btn => {
+    btn.addEventListener('click', () => showView(btn.dataset.view));
+  });
+}
+
+/* ------------------------------------------------------------
+   Class cards — singleton expand (only one open at a time)
+   ------------------------------------------------------------ */
+function installClassCards() {
+  const cards = document.querySelectorAll('.class-card');
+  cards.forEach(card => {
+    const header = card.querySelector(':scope > .panel-header');
     if (!header) return;
 
     const toggle = (e) => {
-      // Don't toggle if the click started on something inside the body
-      // (shouldn't happen since header is its own element, but be safe)
       e.stopPropagation();
-      const isOpen = panel.classList.toggle('open');
-      header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      const willOpen = !card.classList.contains('open');
+      // Close every other card first
+      cards.forEach(c => {
+        if (c !== card && c.classList.contains('open')) {
+          c.classList.remove('open');
+          const h = c.querySelector('.panel-header');
+          if (h) h.setAttribute('aria-expanded', 'false');
+        }
+      });
+      card.classList.toggle('open', willOpen);
+      header.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
     };
 
     header.addEventListener('click', toggle);
@@ -190,19 +218,44 @@ function installPanelToggles() {
 }
 
 /* ------------------------------------------------------------
-   File-existence probes for download links.
-   For each <a data-doc-check> we HEAD-request the asset; if it's
-   missing, we mark the link .missing and swap the action label.
+   Avatar — try jpg, then png, then jpeg; fall back to initials
+   ------------------------------------------------------------ */
+function installAvatar() {
+  const img = document.getElementById('avatar-img');
+  const wrap = document.getElementById('avatar');
+  if (!img || !wrap) return;
+
+  const candidates = [
+    'assets/avatar.jpg',
+    'assets/avatar.png',
+    'assets/avatar.jpeg',
+    'assets/avatar.webp'
+  ];
+  let i = 0;
+
+  const tryNext = () => {
+    if (i >= candidates.length) {
+      wrap.classList.add('no-image');
+      return;
+    }
+    img.src = candidates[i++];
+  };
+
+  img.addEventListener('error', tryNext);
+  // Kick off the first attempt (HTML default already pointed at avatar.jpg,
+  // so increment past it before retrying).
+  i = 1;
+}
+
+/* ------------------------------------------------------------
+   File-existence probes for download links
    ------------------------------------------------------------ */
 function installDocProbes() {
   document.querySelectorAll('a[data-doc-check]').forEach(link => {
     const href = link.getAttribute('href');
     if (!href) return;
-
     fetch(href, { method: 'HEAD' })
-      .then(r => {
-        if (!r.ok) markMissing(link);
-      })
+      .then(r => { if (!r.ok) markMissing(link); })
       .catch(() => markMissing(link));
   });
 }
@@ -214,7 +267,6 @@ function markMissing(link) {
     const lang = document.documentElement.lang || 'en';
     action.textContent = pickLabel(lang, 'action_coming');
   }
-  // Block navigation to the 404
   link.addEventListener('click', e => e.preventDefault());
   link.removeAttribute('download');
 }
@@ -230,15 +282,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // Capture English originals BEFORE any language switch
   captureOriginals();
 
-  // Restore saved theme + language (dark + EN by default)
+  // Restore saved theme + language + view
   let savedTheme = 'dark';
   let savedLang  = 'en';
+  let savedView  = 'intro';
   try {
     savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
     savedLang  = localStorage.getItem('portfolio-lang')  || 'en';
+    savedView  = localStorage.getItem('portfolio-view')  || 'intro';
   } catch (e) { /* ignore */ }
   applyTheme(savedTheme);
   applyLanguage(savedLang);
+  showView(savedView);
+  // showView scrolls — undo that on first load so the hero stays visible
+  window.scrollTo({ top: 0, behavior: 'auto' });
 
   // Theme toggle
   const themeBtn = document.getElementById('theme-toggle');
@@ -254,8 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(current === 'vi' ? 'en' : 'vi');
   });
 
-  // Wire panels and probe files
-  installPanelToggles();
+  // Wire navigation, class cards, avatar, file probes
+  installNavTabs();
+  installClassCards();
+  installAvatar();
   installDocProbes();
 
   // Back to top

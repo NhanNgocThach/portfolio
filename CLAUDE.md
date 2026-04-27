@@ -23,19 +23,27 @@ hosted on GitHub Pages at https://nhanngocthach.github.io/portfolio/.
 └── GITHUB_SETUP.md         # one-time publishing guide
 ```
 
-## Page structure (top to bottom)
+## Page structure — singleton tab layout
 
-1. **Hero** — name, kicker, theme + language toggles in nav
-2. **Introduction** (collapsible) — welcome text only, no video
-3. **Reflection** (collapsible) — written IMP reflection text + reflection video download.
-   No labels showing word count or video duration.
-4. **Elevator Pitch** (collapsible) — download link for `elevator-pitch.mp4`. No player.
-5. **Classes** (collapsible) — opens a 2×2 grid of four class cards.
-   Each class card is itself collapsible (click to expand its assignments).
-   - **AE051** — assignments only
-   - **AE052** — assignments only
-   - **AE061** — reflection text + assignments  ← only course with a reflection card
-   - **AE065** — assignments only
+The site has TWO top-level views; the nav has tabs that swap between them.
+Only one view is visible at a time.
+
+1. **Hero** (always visible) — name, kicker, "Major: Master of Science in Business Analytics".
+   Nav tabs: `Introduction` / `Classes`. Theme + language toggles on the right.
+2. **Introduction view** (default tab)
+   - Welcome paragraph
+   - **Elevator Pitch** block — download link for `elevator-pitch.mp4`. No player.
+   - **Reflection** block — TWO download links: `imp-reflection.docx` (written) +
+     `imp-reflection.mp4` (video). No inline reflection text. No word-count or
+     duration labels.
+3. **Classes view**
+   - 2×2 grid of four class cards. Click any card to expand its assignments.
+   - SINGLETON: only one card open at a time; opening another auto-closes the first.
+   - All four class cards show assignments only. No course-level reflections.
+     - **AE051** — speeches, video reflection, group project
+     - **AE052** — essays + memo
+     - **AE061** — annotated bibliography + research paper
+     - **AE065** — resume, cover letter, LinkedIn, interview project, final presentation
 
 ## Design rules
 
@@ -93,11 +101,7 @@ When adding new UI text:
 
 | Item | Status | Filename |
 |---|---|---|
-| Resume | Being revised | `ae065-resume.pdf` |
-| Informational Interview Request | Not yet drafted | `ae065-interview-request.pdf` |
-| Final Presentation | Not yet drafted | `ae065-final-presentation.pdf` |
-| LinkedIn URL | User to provide | (text in HTML) |
-| Intended Major | User to provide | (text in HTML) |
+| Avatar photo | User to upload | `assets/avatar.jpg` (or `.png`) |
 
 ## Live URL
 

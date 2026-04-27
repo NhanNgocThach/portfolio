@@ -15,6 +15,16 @@
 <nav class="topnav">
   <div class="nav-inner">
     <div class="nav-brand">Nhan Ngoc Thach</div>
+
+    <div class="nav-tabs" role="tablist">
+      <button type="button" class="nav-tab active" data-view="intro" role="tab" aria-selected="true">
+        <span data-i18n="nav_intro">Introduction</span>
+      </button>
+      <button type="button" class="nav-tab" data-view="classes" role="tab" aria-selected="false">
+        <span data-i18n="nav_classes">Classes</span>
+      </button>
+    </div>
+
     <div class="nav-actions">
       <button id="lang-toggle" class="icon-btn" type="button" aria-label="Switch language">
         <span aria-hidden="true">🌐</span>
@@ -28,6 +38,10 @@
 </nav>
 
 <header class="hero" id="top">
+  <div class="avatar" id="avatar">
+    <img id="avatar-img" src="assets/avatar.jpg" alt="Nhan Ngoc Thach" />
+    <span class="avatar-fallback" aria-hidden="true">NT</span>
+  </div>
   <span class="hero-kicker" data-i18n="hero_kicker">INTO Suffolk · Integrated Master's Program</span>
   <h1 data-i18n="hero_title">Final Portfolio</h1>
   <p class="hero-sub" data-i18n="hero_sub">
@@ -35,336 +49,303 @@
     evidence of readiness for graduate study at Suffolk University.
   </p>
   <div class="hero-meta">
-    <span><strong data-i18n="hero_student">Student:</strong> Nhan Ngoc Thach</span>
-    <span><strong data-i18n="hero_major">Intended Major:</strong> <span data-i18n="hero_major_value">[Intended Major]</span></span>
+    <span><strong data-i18n="hero_major">Major:</strong> Master of Science in Business Analytics</span>
   </div>
 </header>
 
 <main>
 
-  <!-- ====================== INTRODUCTION ====================== -->
-  <section class="panel" data-section="intro">
-    <button type="button" class="panel-header" aria-expanded="false">
-      <div class="panel-meta">
-        <div class="panel-eyebrow" data-i18n="section_label">Section</div>
-        <div class="panel-title" data-i18n="intro_title">Introduction</div>
-      </div>
-      <span class="expand-icon" aria-hidden="true">+</span>
-    </button>
-    <div class="panel-body">
+  <!-- ====================== INTRODUCTION VIEW ====================== -->
+  <section class="view active" data-view="intro">
+
+    <div class="intro-card">
+      <h2 data-i18n="intro_title">Introduction</h2>
       <p data-i18n="intro_body">
         Welcome to my final portfolio for the INTO Suffolk Integrated Master's Program.
         This site brings together selected assignments, reflections, and professional
         materials that trace my growth as a writer, communicator, and graduate-level learner.
       </p>
     </div>
-  </section>
 
-  <!-- ====================== REFLECTION ====================== -->
-  <section class="panel" data-section="reflection">
-    <button type="button" class="panel-header" aria-expanded="false">
-      <div class="panel-meta">
-        <div class="panel-eyebrow" data-i18n="section_label">Section</div>
-        <div class="panel-title" data-i18n="reflection_title">Reflection</div>
+    <div class="intro-row">
+
+      <!-- Elevator Pitch -->
+      <div class="intro-block">
+        <h3 data-i18n="pitch_title">Elevator Pitch</h3>
+        <ul class="download-list">
+          <li>
+            <a class="download-link" href="assets/elevator-pitch.mp4" download data-doc-check>
+              <span class="dl-icon" aria-hidden="true">▶</span>
+              <span class="dl-meta">
+                <span class="dl-title" data-i18n="pitch_file_title">Elevator Pitch Video</span>
+                <span class="dl-type">MP4</span>
+              </span>
+              <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <span class="expand-icon" aria-hidden="true">+</span>
-    </button>
-    <div class="panel-body">
-      <blockquote class="reflection" data-i18n="reflection_body">
-        <p>The Integrated Master's Program has helped me grow academically, professionally, and personally. Since I moved directly from the ESL program to IMP, the transition felt natural for me. I also appreciated that taking fewer credit classes helped reduce stress compared to having a full course load. This allowed me to focus on improving my English skills while preparing for graduate-level courses. It also gave me more time to adjust to more advanced assignments and improve skills that will be important in my future graduate classes.</p>
-        <p>Academically, I improved many important skills during the program. One of the biggest improvements was my presentation and public speaking skills. After completing many presentations, I became more confident speaking in front of a class and expressing my ideas clearly. At the beginning, I was nervous because I worried about making mistakes while speaking English. However, after practicing many times, I learned how to organize my ideas and communicate more effectively. My confidence also grew because I had more opportunities to participate in discussions and share my opinions with classmates.</p>
-        <p>In addition, my writing skills improved through essays, assignments, reports, and discussion posts. I learned how to organize my ideas more clearly and write in a more professional and academic style. I became more familiar with academic writing formats and learned how to support my ideas with evidence. Debate activities also helped me strengthen my critical thinking skills because I had to defend my opinions with clear evidence and reasoning. These experiences helped me become more comfortable expressing my ideas in both speaking and writing.</p>
-        <p>Working on a research paper was one of the most valuable experiences in the program. It helped me improve my ability to read academic articles, analyze information, and understand research studies. At first, reading research papers was difficult because of complex vocabulary and long articles. However, I gradually learned how to identify important information, compare sources, and build stronger arguments. I also learned how to manage long-term assignments and stay organized throughout the writing process.</p>
-        <p>Professionally, the program helped me prepare for my future career. I learned how to build a stronger resume and better understand what employers expect from candidates. I also practiced interview preparation, including how to introduce myself, answer professional questions, and communicate my strengths. These experiences helped me feel more prepared for future internships and job opportunities. I also learned the importance of networking and building professional connections.</p>
-        <p>My teamwork skills also improved because many assignments required collaboration with classmates. Through group projects, I learned how to communicate better, share responsibilities, listen to different ideas, and solve problems together. Working with classmates from different backgrounds helped me become more flexible and respectful of different perspectives.</p>
-        <p>Personally, I became more confident, independent, and prepared for future challenges. I learned how to manage my time better, handle academic pressure, and continue improving myself step by step. Overall, the Integrated Master's Program helped me develop important skills that will support my future academic and professional goals.</p>
-      </blockquote>
-      <ul class="download-list">
-        <li>
-          <a class="download-link" href="assets/imp-reflection.mp4" download data-doc-check>
-            <span class="dl-icon" aria-hidden="true">▶</span>
-            <span class="dl-meta">
-              <span class="dl-title" data-i18n="reflection_video_title">Video Reflection</span>
-              <span class="dl-type">MP4</span>
-            </span>
-            <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-          </a>
-        </li>
-      </ul>
+
+      <!-- IMP Reflection -->
+      <div class="intro-block">
+        <h3 data-i18n="reflection_title">Reflection</h3>
+        <ul class="download-list">
+          <li>
+            <a class="download-link" href="assets/imp-reflection.docx" download data-doc-check>
+              <span class="dl-icon" aria-hidden="true">📄</span>
+              <span class="dl-meta">
+                <span class="dl-title" data-i18n="reflection_doc_title">Written Reflection</span>
+                <span class="dl-type">DOCX</span>
+              </span>
+              <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+            </a>
+          </li>
+          <li>
+            <a class="download-link" href="assets/imp-reflection.mp4" download data-doc-check>
+              <span class="dl-icon" aria-hidden="true">▶</span>
+              <span class="dl-meta">
+                <span class="dl-title" data-i18n="reflection_video_title">Video Reflection</span>
+                <span class="dl-type">MP4</span>
+              </span>
+              <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
-  <!-- ====================== ELEVATOR PITCH ====================== -->
-  <section class="panel" data-section="pitch">
-    <button type="button" class="panel-header" aria-expanded="false">
-      <div class="panel-meta">
-        <div class="panel-eyebrow" data-i18n="section_label">Section</div>
-        <div class="panel-title" data-i18n="pitch_title">Elevator Pitch</div>
-      </div>
-      <span class="expand-icon" aria-hidden="true">+</span>
-    </button>
-    <div class="panel-body">
-      <p class="section-intro-text" data-i18n="pitch_body">
-        A short introduction to who I am and the goals I plan to pursue after the AE program.
-      </p>
-      <ul class="download-list">
-        <li>
-          <a class="download-link" href="assets/elevator-pitch.mp4" download data-doc-check>
-            <span class="dl-icon" aria-hidden="true">▶</span>
-            <span class="dl-meta">
-              <span class="dl-title" data-i18n="pitch_file_title">Elevator Pitch Video</span>
-              <span class="dl-type">MP4</span>
-            </span>
-            <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-          </a>
-        </li>
-      </ul>
+  <!-- ====================== CLASSES VIEW ====================== -->
+  <section class="view" data-view="classes">
+
+    <div class="intro-card">
+      <h2 data-i18n="classes_title">Classes</h2>
+      <p data-i18n="classes_sub">Click any course to view its assignments.</p>
     </div>
-  </section>
 
-  <!-- ====================== CLASSES ====================== -->
-  <section class="panel" data-section="classes">
-    <button type="button" class="panel-header" aria-expanded="false">
-      <div class="panel-meta">
-        <div class="panel-eyebrow" data-i18n="section_label">Section</div>
-        <div class="panel-title" data-i18n="classes_title">Classes</div>
-        <div class="panel-sub" data-i18n="classes_sub">Click any course to view its assignments.</div>
+    <div class="class-grid">
+
+      <!-- AE051 -->
+      <div class="panel class-card" data-course="ae051">
+        <button type="button" class="panel-header" aria-expanded="false">
+          <div class="panel-meta">
+            <div class="panel-eyebrow">AE051</div>
+            <div class="panel-title" data-i18n="ae051_title">Graduate Communication Across Disciplines</div>
+          </div>
+          <span class="expand-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="panel-body">
+          <ul class="download-list">
+            <li>
+              <a class="download-link" href="assets/ae051-video-reflection.mp4" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">▶</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae051_reflection_title">Video Reflection</span>
+                  <span class="dl-type">MP4</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae051-demonstration-speech.pdf" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae051_demo_title">Demonstration Speech</span>
+                  <span class="dl-type">PDF</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae051-informative-speech.mp4" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">▶</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae051_informative_title">Informative Speech</span>
+                  <span class="dl-type">MP4</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae051-persuasive-speech.pdf" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae051_persuasive_title">Persuasive Speech</span>
+                  <span class="dl-type">PDF</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae051-group-project.pdf" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae051_group_title">Group Project</span>
+                  <span class="dl-type">PDF</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <span class="expand-icon" aria-hidden="true">+</span>
-    </button>
-    <div class="panel-body">
-      <div class="class-grid">
 
-        <!-- AE051 -->
-        <div class="panel class-card" data-course="ae051">
-          <button type="button" class="panel-header" aria-expanded="false">
-            <div class="panel-meta">
-              <div class="panel-eyebrow">AE051</div>
-              <div class="panel-title" data-i18n="ae051_title">Graduate Communication Across Disciplines</div>
-            </div>
-            <span class="expand-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="panel-body">
-            <ul class="download-list">
-              <li>
-                <a class="download-link" href="assets/ae051-video-reflection.mp4" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">▶</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae051_reflection_title">Video Reflection</span>
-                    <span class="dl-type">MP4</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae051-demonstration-speech.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae051_demo_title">Demonstration Speech</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae051-informative-speech.mp4" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">▶</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae051_informative_title">Informative Speech</span>
-                    <span class="dl-type">MP4</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae051-persuasive-speech.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae051_persuasive_title">Persuasive Speech</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae051-group-project.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae051_group_title">Group Project</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-            </ul>
+      <!-- AE052 -->
+      <div class="panel class-card" data-course="ae052">
+        <button type="button" class="panel-header" aria-expanded="false">
+          <div class="panel-meta">
+            <div class="panel-eyebrow">AE052</div>
+            <div class="panel-title" data-i18n="ae052_title">Graduate Academic Success</div>
           </div>
+          <span class="expand-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="panel-body">
+          <ul class="download-list">
+            <li>
+              <a class="download-link" href="assets/ae052-critical-analysis.docx" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae052_critical_title">Critical Analysis Essay</span>
+                  <span class="dl-type">DOCX</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae052-reflective-essay.docx" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae052_reflective_title">Reflective Essay</span>
+                  <span class="dl-type">DOCX</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae052-professional-memo.docx" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae052_memo_title">Professional Memo</span>
+                  <span class="dl-type">DOCX</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/narrative-essay.pdf" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae052_narrative_title">Narrative Essay</span>
+                  <span class="dl-type">PDF</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+          </ul>
         </div>
-
-        <!-- AE052 -->
-        <div class="panel class-card" data-course="ae052">
-          <button type="button" class="panel-header" aria-expanded="false">
-            <div class="panel-meta">
-              <div class="panel-eyebrow">AE052</div>
-              <div class="panel-title" data-i18n="ae052_title">Graduate Academic Success</div>
-            </div>
-            <span class="expand-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="panel-body">
-            <ul class="download-list">
-              <li>
-                <a class="download-link" href="assets/ae052-critical-analysis.docx" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae052_critical_title">Critical Analysis Essay</span>
-                    <span class="dl-type">DOCX</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae052-reflective-essay.docx" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae052_reflective_title">Reflective Essay</span>
-                    <span class="dl-type">DOCX</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae052-professional-memo.docx" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae052_memo_title">Professional Memo</span>
-                    <span class="dl-type">DOCX</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/narrative-essay.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae052_narrative_title">Narrative Essay — "Study Abroad"</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- AE061 -->
-        <div class="panel class-card" data-course="ae061">
-          <button type="button" class="panel-header" aria-expanded="false">
-            <div class="panel-meta">
-              <div class="panel-eyebrow">AE061</div>
-              <div class="panel-title" data-i18n="ae061_title">Graduate Writing &amp; Research Skills</div>
-            </div>
-            <span class="expand-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="panel-body">
-
-            <h4 data-i18n="ae061_reflection_title">Course Reflection</h4>
-            <blockquote class="reflection" data-i18n="ae061_reflection_body">
-              <p>My progress in AE 061 is best represented by the completion of a ten-page research paper. While I adopted technical skills like APA style and source navigation, the most significant growth occurred in my analytical and critical thinking abilities.</p>
-              <p>Managing a project of this scale required me to do more than just write; I had to analyze complex information from various sources and synthesize it into a logical, evidence-based argument. This process pushed me to evaluate data critically and ensure that every claim was supported by sound reasoning.</p>
-              <p>Completing this paper was incredibly stressful due to the depth of analysis required, but it is my proudest accomplishment. It proved that I can maintain clarity and high-level thinking over a long-form academic work. I now feel prepared to apply these analytical skills to the demanding research and data-driven projects I will face in my future graduate studies.</p>
-            </blockquote>
-
-            <h4 data-i18n="ae061_assignments_title">Assignments</h4>
-            <ul class="download-list">
-              <li>
-                <a class="download-link" href="assets/ae061-annotated-bibliography.docx" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae061_bib_title">Annotated Bibliography</span>
-                    <span class="dl-type">DOCX</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae061-research-paper.docx" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae061_paper_title">Research Paper</span>
-                    <span class="dl-type">DOCX</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- AE065 -->
-        <div class="panel class-card" data-course="ae065">
-          <button type="button" class="panel-header" aria-expanded="false">
-            <div class="panel-meta">
-              <div class="panel-eyebrow">AE065</div>
-              <div class="panel-title" data-i18n="ae065_title">Advanced Graduate Communication</div>
-            </div>
-            <span class="expand-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="panel-body">
-            <ul class="download-list">
-              <li>
-                <a class="download-link" href="assets/ae065-resume.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae065_resume_title">Resume</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae065-cover-letter.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae065_cover_title">Cover Letter</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="https://www.linkedin.com/in/[your-handle]" target="_blank" rel="noopener">
-                  <span class="dl-icon" aria-hidden="true">in</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae065_linkedin_title">LinkedIn Profile</span>
-                    <span class="dl-type">External link</span>
-                  </span>
-                  <span class="dl-action" data-i18n="action_open">Open</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae065-interview-request.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae065_interview_title">Informational Interview Request</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-              <li>
-                <a class="download-link" href="assets/ae065-final-presentation.pdf" download data-doc-check>
-                  <span class="dl-icon" aria-hidden="true">📄</span>
-                  <span class="dl-meta">
-                    <span class="dl-title" data-i18n="ae065_final_title">Final Presentation</span>
-                    <span class="dl-type">PDF</span>
-                  </span>
-                  <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
       </div>
+
+      <!-- AE061 -->
+      <div class="panel class-card" data-course="ae061">
+        <button type="button" class="panel-header" aria-expanded="false">
+          <div class="panel-meta">
+            <div class="panel-eyebrow">AE061</div>
+            <div class="panel-title" data-i18n="ae061_title">Graduate Writing &amp; Research Skills</div>
+          </div>
+          <span class="expand-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="panel-body">
+          <ul class="download-list">
+            <li>
+              <a class="download-link" href="assets/ae061-annotated-bibliography.docx" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae061_bib_title">Annotated Bibliography</span>
+                  <span class="dl-type">DOCX</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae061-research-paper.docx" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae061_paper_title">Research Paper</span>
+                  <span class="dl-type">DOCX</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- AE065 -->
+      <div class="panel class-card" data-course="ae065">
+        <button type="button" class="panel-header" aria-expanded="false">
+          <div class="panel-meta">
+            <div class="panel-eyebrow">AE065</div>
+            <div class="panel-title" data-i18n="ae065_title">Advanced Graduate Communication</div>
+          </div>
+          <span class="expand-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="panel-body">
+          <ul class="download-list">
+            <li>
+              <a class="download-link" href="assets/ae065-resume.pdf" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae065_resume_title">Resume</span>
+                  <span class="dl-type">PDF</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae065-cover-letter.docx" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae065_cover_title">Cover Letter</span>
+                  <span class="dl-type">DOCX</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="https://www.linkedin.com/in/ngoc-thach-nhan-8456a2349/" target="_blank" rel="noopener">
+                <span class="dl-icon" aria-hidden="true">in</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae065_linkedin_title">LinkedIn Profile</span>
+                  <span class="dl-type">External link</span>
+                </span>
+                <span class="dl-action" data-i18n="action_open">Open</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae065-interview-request.pdf" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📄</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae065_interview_title">Informational Interview Project</span>
+                  <span class="dl-type">PDF</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+            <li>
+              <a class="download-link" href="assets/ae065-final-presentation.pptx" download data-doc-check>
+                <span class="dl-icon" aria-hidden="true">📊</span>
+                <span class="dl-meta">
+                  <span class="dl-title" data-i18n="ae065_final_title">Final Presentation</span>
+                  <span class="dl-type">PPTX</span>
+                </span>
+                <span class="dl-action" data-doc-action data-i18n="action_download">Download</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </section>
 
