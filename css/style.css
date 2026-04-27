@@ -339,6 +339,36 @@ p  { margin: 0 0 1rem; color: var(--muted-strong); }
   height: auto;
   background: #000;
 }
+.video-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: -.5rem;
+  margin-bottom: .25rem;
+}
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .5rem .95rem;
+  border-radius: 999px;
+  background: var(--accent-soft, rgba(59, 130, 246, .15));
+  color: var(--accent);
+  font-size: .85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all .25s ease;
+}
+.btn-download:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+}
+.btn-download.missing {
+  opacity: .55;
+  pointer-events: none;
+}
 
 /* ============================================================
    View cards (one visible at a time)
