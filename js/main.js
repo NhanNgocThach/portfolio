@@ -20,10 +20,8 @@ const i18n = {
     nav_intro: "Giới Thiệu",
     nav_classes: "Các Môn Học",
 
-    /* Hero */
-    hero_kicker: "INTO Suffolk · Chương trình Thạc sĩ Tích hợp",
-    hero_title: "Hồ Sơ Cuối Khóa",
-    hero_sub: "Tổng hợp các bài tập học thuật, chuyên môn và bài phản ánh — minh chứng cho sự sẵn sàng học sau đại học tại Đại học Suffolk.",
+    /* Profile */
+    profile_role: "Sinh viên MSBA @ Đại học Suffolk",
     hero_major: "Chuyên ngành:",
 
     /* Generic */
@@ -37,11 +35,13 @@ const i18n = {
 
     /* Reflection */
     reflection_title: "Bài Phản Ánh",
+    reflection_sub: "Bài phản ánh viết và ghi hình của tôi về hành trình IMP.",
     reflection_doc_title: "Bài Phản Ánh Viết",
     reflection_video_title: "Video Phản Ánh",
 
     /* Elevator Pitch */
     pitch_title: "Bài Thuyết Trình Giới Thiệu",
+    pitch_sub: "Một bài giới thiệu ngắn về tôi và những mục tiêu tôi dự định theo đuổi.",
     pitch_file_title: "Video Bài Thuyết Trình Giới Thiệu",
 
     /* Classes */
@@ -159,50 +159,37 @@ function showView(name) {
   document.querySelectorAll('.view').forEach(v => {
     v.classList.toggle('active', v.dataset.view === name);
   });
-  document.querySelectorAll('.nav-tab').forEach(b => {
+  document.querySelectorAll('.nav-btn').forEach(b => {
     const isActive = b.dataset.view === name;
     b.classList.toggle('active', isActive);
-    b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    b.setAttribute('aria-current', isActive ? 'page' : 'false');
   });
-  // When leaving the Classes view, collapse any open class cards
-  if (name !== 'classes') {
-    document.querySelectorAll('.class-card.open').forEach(c => {
-      c.classList.remove('open');
-      const h = c.querySelector('.panel-header');
-      if (h) h.setAttribute('aria-expanded', 'false');
-    });
-  }
+  // Pause any playing videos in views we're leaving
+  document.querySelectorAll('.view:not(.active) video').forEach(v => {
+    if (!v.paused) v.pause();
+  });
   try { localStorage.setItem('portfolio-view', name); } catch (e) { /* ignore */ }
-  // Scroll back to the top of the content so the user sees the view start
+  // Scroll the content area into view
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function installNavTabs() {
-  document.querySelectorAll('.nav-tab').forEach(btn => {
+  document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => showView(btn.dataset.view));
   });
 }
 
 /* ------------------------------------------------------------
-   Class cards — singleton expand (only one open at a time)
+   Class cards — independent expand (multiple can be open at once)
    ------------------------------------------------------------ */
 function installClassCards() {
-  const cards = document.querySelectorAll('.class-card');
-  cards.forEach(card => {
+  document.querySelectorAll('.class-card').forEach(card => {
     const header = card.querySelector(':scope > .panel-header');
     if (!header) return;
 
     const toggle = (e) => {
       e.stopPropagation();
       const willOpen = !card.classList.contains('open');
-      // Close every other card first
-      cards.forEach(c => {
-        if (c !== card && c.classList.contains('open')) {
-          c.classList.remove('open');
-          const h = c.querySelector('.panel-header');
-          if (h) h.setAttribute('aria-expanded', 'false');
-        }
-      });
       card.classList.toggle('open', willOpen);
       header.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
     };
@@ -226,8 +213,8 @@ function installAvatar() {
   if (!img || !wrap) return;
 
   const candidates = [
-    'assets/avatar.jpg',
     'assets/avatar.png',
+    'assets/avatar.jpg',
     'assets/avatar.jpeg',
     'assets/avatar.webp'
   ];
@@ -242,8 +229,7 @@ function installAvatar() {
   };
 
   img.addEventListener('error', tryNext);
-  // Kick off the first attempt (HTML default already pointed at avatar.jpg,
-  // so increment past it before retrying).
+  // HTML default already points at avatar.png, so step past it before retrying.
   i = 1;
 }
 

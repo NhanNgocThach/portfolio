@@ -23,27 +23,37 @@ hosted on GitHub Pages at https://nhanngocthach.github.io/portfolio/.
 └── GITHUB_SETUP.md         # one-time publishing guide
 ```
 
-## Page structure — singleton tab layout
+## Page structure — sidebar + singleton view layout
 
-The site has TWO top-level views; the nav has tabs that swap between them.
-Only one view is visible at a time.
+The site uses a fixed left sidebar with icon nav. Clicking a sidebar icon swaps
+which view-card is shown in the center column. Only one view is visible at a time.
 
-1. **Hero** (always visible) — name, kicker, "Major: Master of Science in Business Analytics".
-   Nav tabs: `Introduction` / `Classes`. Theme + language toggles on the right.
-2. **Introduction view** (default tab)
-   - Welcome paragraph
-   - **Elevator Pitch** block — download link for `elevator-pitch.mp4`. No player.
-   - **Reflection** block — TWO download links: `imp-reflection.docx` (written) +
-     `imp-reflection.mp4` (video). No inline reflection text. No word-count or
-     duration labels.
-3. **Classes view**
-   - 2×2 grid of four class cards. Click any card to expand its assignments.
-   - SINGLETON: only one card open at a time; opening another auto-closes the first.
-   - All four class cards show assignments only. No course-level reflections.
-     - **AE051** — speeches, video reflection, group project
-     - **AE052** — essays + memo
-     - **AE061** — annotated bibliography + research paper
-     - **AE065** — resume, cover letter, LinkedIn, interview project, final presentation
+### Sidebar (fixed, dark, 72px wide)
+Top → bottom: theme toggle (sun/moon), Introduction, Elevator Pitch, Reflection,
+Classes, language toggle (EN/VI). Tooltips appear on hover. On mobile (≤640px)
+the sidebar collapses to a top bar.
+
+### Center column — profile card on top + view card below
+The profile card is ALWAYS visible: avatar (circle, accent ring, 120px) + name
+"Nhan Ngoc Thach" + role "MSBA Student @ Suffolk University" + social icons
+(email, LinkedIn, GitHub).
+
+Below the profile card sits exactly ONE view card at a time:
+1. **Introduction view** (default) — welcome paragraph + a "Major: Master of
+   Science in Business Analytics" line.
+2. **Elevator Pitch view** — inline `<video controls>` player for `elevator-pitch.mp4`
+   (small frame, native fullscreen + download via the browser's controls menu).
+3. **Reflection view** — TWO download links: `imp-reflection.docx` (written)
+   + `imp-reflection.mp4` (video). No inline reflection text.
+4. **Classes view** — single column of four class cards. Click a card to
+   expand its assignments. SINGLETON: only one card open at a time.
+   - **AE051** — speeches, video reflection, group project
+   - **AE052** — essays + memo
+   - **AE061** — annotated bibliography + research paper
+   - **AE065** — resume (PDF), cover letter (DOCX), LinkedIn, interview project (PDF), final presentation (PPTX)
+
+   Class cards are independent — multiple can be open at the same time. Opening one
+   does NOT close the others.
 
 ## Design rules
 
@@ -51,8 +61,12 @@ Only one view is visible at a time.
    (`--bg`, `--ink`, `--surface`, `--accent`, etc.) — never hardcode colors in components.
 2. **Click-to-expand everything.** Top-level sections are collapsed by default; clicking
    the header expands the body. Class cards inside the Classes section behave the same way.
-3. **No embedded video players anywhere.** Videos are presented as download links
-   (`<a href download class="download-card">`) — never `<video>` tags.
+3. **Videos are download links — with one exception.** The Reflection view's
+   `imp-reflection.mp4` and AE051's `ae051-video-reflection.mp4` are presented as
+   download links (`<a href download class="download-link">`), never `<video>` tags.
+   The Elevator Pitch view IS allowed to use an inline `<video controls>` player
+   (rendered inside `.video-frame`) so the user can preview it directly. The native
+   browser controls already give fullscreen + download, so no custom UI is needed.
 4. **No labels showing time/word count.** Headings say "Reflection" not "Reflection (500 words)";
    "Elevator Pitch" not "Elevator Pitch (1 minute)"; etc.
 5. **Elevator Pitch lives ONLY in its top-level section.** Never duplicate it inside AE065.
